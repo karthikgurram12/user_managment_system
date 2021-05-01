@@ -21,22 +21,20 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDAO userDAO;
 
-    /**
-     * Default constructor. 
-     */
-    public UserServlet() {
-        // TODO Auto-generated constructor stub
-    	this.userDAO=new UserDAO();
-    }
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Default constructor.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public UserServlet() {
+		// TODO Auto-generated constructor stub
+		this.userDAO = new UserDAO();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String action=request.getServletPath();
-		
-		switch(action) {
+		String action = request.getServletPath();
+
+		switch (action) {
 		case "/new":
 			showNewForm(request, response);
 			break;
@@ -56,71 +54,74 @@ public class UserServlet extends HttpServlet {
 			listUsers(request, response);
 			break;
 		}
-	
+
 	}
-	
-private void listUsers(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		List<User> listUser=userDAO.selectAllUsers();
+
+	private void listUsers(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<User> listUser = userDAO.selectAllUsers();
 		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher =request.getRequestDispatcher("user-list.jsp");
-			dispatcher.forward(request, response);
-			
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+		dispatcher.forward(request, response);
+
 	}
-	
-	
-	private void showNewForm(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		
-		RequestDispatcher dispatcher =request.getRequestDispatcher("user-form.jsp");
-			dispatcher.forward(request, response);
-			
+
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
+		dispatcher.forward(request, response);
+
 	}
-	
-private void insertUser(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		
-		String name=request.getParameter("name");
-		String email=request.getParameter("email");
-		String country=request.getParameter("country");
-		User newUser=new User(name,email,country);
+
+	private void insertUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+		User newUser = new User(name, email, country);
 		userDAO.insertUser(newUser);
 		response.sendRedirect("list");
-			
+
 	}
 
-private void deleteUser(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-	
-	int id=Integer.parseInt(request.getParameter("id"));
-	userDAO.deleteUser(id);
-	response.sendRedirect("list");
-		
-}
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-private void showEditFormUser(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-	
-	int id=Integer.parseInt(request.getParameter("id"));
-	User existingUser=userDAO.selectUser(id);
-	RequestDispatcher dispatcher=request.getRequestDispatcher("user-form.jsp");
-	request.setAttribute("user", existingUser);
-	dispatcher.forward(request, response);
-		
-}
+		int id = Integer.parseInt(request.getParameter("id"));
+		userDAO.deleteUser(id);
+		response.sendRedirect("list");
 
-private void updateUser(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-	
-	int id=Integer.parseInt(request.getParameter("id"));
-	String name=request.getParameter("name");
-	String email=request.getParameter("email");
-	String country=request.getParameter("country");
-	User newUser=new User(id,name,email,country);
-	userDAO.updateUser(newUser);
-	response.sendRedirect("list");
-		
-}
+	}
 
-	
+	private void showEditFormUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-	doGet(request, response);
-}
+		int id = Integer.parseInt(request.getParameter("id"));
+		User existingUser = userDAO.selectUser(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
+		request.setAttribute("user", existingUser);
+		dispatcher.forward(request, response);
+
+	}
+
+	private void updateUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+		User newUser = new User(id, name, email, country);
+		userDAO.updateUser(newUser);
+		response.sendRedirect("list");
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
 
 }
