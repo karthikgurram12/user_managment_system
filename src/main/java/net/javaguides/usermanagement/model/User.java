@@ -6,20 +6,23 @@ public class User {
 	private int id;
 	private String name;
 	private String email;
+	private String company;
 	private String country;
 	
-	public User(int id, String name, String email, String country) {
+	public User(int id, String name, String email, String company,String country) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.company = company;
 		this.country = country;
 	}
 	
-	public User(String name, String email, String country) {
+	public User(String name, String email, String company,String country) {
 		super();
 		this.name = name;
 		this.email = email;
+		this.company= company;
 		this.country = country;
 	}
 
@@ -47,5 +50,14 @@ public class User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
 	
 }

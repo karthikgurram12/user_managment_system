@@ -17,12 +17,12 @@ public class UserDAO {
 	private String jdbcun="root";
 	private String jdbcpass="password";
 	
-	private static final String INSERT_USERS_SQL ="INSERT INTO users"+"(name,email,country) VALUES"+"(?,?,?);";
+	private static final String INSERT_USERS_SQL ="INSERT INTO users"+"(name,email,company,country) VALUES"+"(?,?,?,?);";
 	
-	private static final String SELECT_USER_BY_ID="select id,name,email,country from users where id=?";
+	private static final String SELECT_USER_BY_ID="select id,name,email,company,country from users where id=?";
 	private static final String SELECT_ALL_USERS="select * from users";
 	private static final String DELETE_USERS_SQL="delete from users where id=?;";
-	private static final String UPDATE_USERS_SQL = "update users set name=?,email=?,country=? where id=?;";
+	private static final String UPDATE_USERS_SQL = "update users set name=?,email=?,company=?,country=? where id=?;";
 	
 	protected Connection getConnection() {
 		Connection con=null;
@@ -30,9 +30,7 @@ public class UserDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			con= DriverManager.getConnection(jdbcURL, jdbcun, jdbcpass);
 			}catch(SQLException e) {
-			//Todo auto-generated catch block
 		}catch(ClassNotFoundException e) {
-			//Todo auto-generated catch block
 			e.printStackTrace();
 		}
 		return con;
@@ -44,7 +42,8 @@ public class UserDAO {
 			PreparedStatement preparedStatement=con.prepareStatement(INSERT_USERS_SQL);
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getEmail());
-			preparedStatement.setString(3, user.getCountry());
+			preparedStatement.setString(3, user.getCompany());
+			preparedStatement.setString(4, user.getCountry());
 			preparedStatement.executeUpdate();
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -59,8 +58,9 @@ public class UserDAO {
 			PreparedStatement statement=con.prepareStatement(UPDATE_USERS_SQL);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getEmail());
-			statement.setString(3, user.getCountry());
-			statement.setInt(4, user.getId());
+			statement.setString(3, user.getCompany());
+			statement.setString(4, user.getCountry());
+			statement.setInt(5, user.getId());
 			rowUpdated=statement.executeUpdate()>0;
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -85,8 +85,9 @@ public class UserDAO {
 			{
 				String name=rs.getString("name");
 				String email=rs.getString("email");
+				String company=rs.getString("company");
 				String country=rs.getString("country");
-				user=new User(id,name,email,country);
+				user=new User(id,name,email,company,country);
 			}
 		}catch (SQLException e) {
 			// TODO: handle exception
@@ -114,7 +115,8 @@ public class UserDAO {
 				String name=rs.getString("name");
 				String email=rs.getString("email");
 				String country=rs.getString("country");
-				users.add(new User(id,name,email,country));
+				String company=rs.getString("company");
+				users.add(new User(id,name,email,company,country));
 			}
 		}catch (SQLException e) {
 			// TODO: handle exception

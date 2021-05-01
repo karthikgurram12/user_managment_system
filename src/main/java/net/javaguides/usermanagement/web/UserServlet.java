@@ -79,8 +79,9 @@ public class UserServlet extends HttpServlet {
 
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
+		String company = request.getParameter("company");
 		String country = request.getParameter("country");
-		User newUser = new User(name, email, country);
+		User newUser = new User(name, email, company, country);
 		userDAO.insertUser(newUser);
 		response.sendRedirect("list");
 
@@ -112,8 +113,9 @@ public class UserServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
+		String company = request.getParameter("company");
 		String country = request.getParameter("country");
-		User newUser = new User(id, name, email, country);
+		User newUser = new User(id, name, email,company, country);
 		userDAO.updateUser(newUser);
 		response.sendRedirect("list");
 

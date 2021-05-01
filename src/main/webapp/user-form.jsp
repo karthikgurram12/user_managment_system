@@ -9,13 +9,13 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 </head>
-<body>
+<body style="background-image: url('https://1.bp.blogspot.com/-sTxAHAxirGM/WVbAe2098nI/AAAAAAABENs/_I5sYMYgLOUzaIE7FfF4qdGX-hoAkq9SgCLcBGAs/s1600/Blog_20170624_113552.jpg');">
 
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
 			style="background-color: tomato">
 			<div>
-				<a href="https://www.javaguides.net" class="navbar-brand"> User Management App </a>
+				<a href="https://www.javaguides.net" class="navbar-brand"> Users App </a>
 			</div>
 
 			<ul class="navbar-nav">
@@ -60,6 +60,12 @@
 					<label>User Email</label> <input type="text"
 						value="<c:out value='${user.email}' />" class="form-control"
 						name="email">
+				</fieldset>
+				
+				<fieldset class="form-group">
+					<label>User Company</label> <input type="text"
+						value="<c:out value='${user.company}' />" class="form-control"
+						name="company">
 				</fieldset>
 
 				<fieldset class="form-group">

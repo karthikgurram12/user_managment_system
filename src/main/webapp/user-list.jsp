@@ -9,8 +9,7 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 </head>
-<body>
-
+<body style="background-color: violet">
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
 			style="background-color: tomato">
@@ -45,6 +44,7 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>Email</th>
+						<th>Company</th>
 						<th>Country</th>
 						<th>Actions</th>
 					</tr>
@@ -57,6 +57,7 @@
 							<td><c:out value="${user.id}" /></td>
 							<td><c:out value="${user.name}" /></td>
 							<td><c:out value="${user.email}" /></td>
+							<td><c:out value="${user.company}" /></td>
 							<td><c:out value="${user.country}" /></td>
 							<td><a href="edit?id=<c:out value='${user.id}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
