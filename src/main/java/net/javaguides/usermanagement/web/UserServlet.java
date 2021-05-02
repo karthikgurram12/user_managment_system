@@ -20,6 +20,9 @@ import net.javaguides.usermanagement.model.User;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDAO userDAO;
+	
+	//task-1 add drop-down list for country, make name, email, company and country required and  set min and max characters.
+	//task-2: deploy the application in any of the cloud platform, to make it available in internet.
 
 	/**
 	 * Default constructor.
